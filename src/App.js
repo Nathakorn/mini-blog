@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, DatePicker } from "antd";
 
-import "./App.scss";
+import "./sass/App.scss";
 import "./App.less";
 
 class App extends React.Component {
