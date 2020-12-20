@@ -8,7 +8,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <header className="header">header</header>
+        <header className="header">
+          <div className="logo-section">Youknow</div>
+          <div className="menu">menu</div>
+        </header>
         <div className="content">
           <nav className="sidebar">sidebar</nav>
           <main className="blog-view">

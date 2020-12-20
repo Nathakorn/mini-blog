@@ -1,0 +1,32 @@
+@import "./_variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.header {
+  background-color: $black;
+  height: 7rem;
+  display: flex;
+}
+.logo-section {
+  flex: 0 0 20%;
+  background-color: $primary;
+}
+.menu {
+  flex: 1;
+  background-color: $white;
+}
+.content {
+  display: flex;
+  flex: 1;
+}
+.sidebar {
+  background-color: $primary-dark-1;
+  flex: 0 0 20%;
+}
+.blog-view {
+  background-color: $grey;
+  flex: 1;
+}
