@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, DatePicker } from "antd";
-
-import "./sass/App.scss";
-import "./App.less";
+// import { Button, DatePicker } from "antd";
+import Card from "./components/Card";
+import "./antd.less";
 
 class App extends React.Component {
   render() {
@@ -15,10 +14,9 @@ class App extends React.Component {
         <div className="content">
           <nav className="sidebar">sidebar</nav>
           <main className="blog-view">
-            <Button type="primary" size="large">
-              Primary
-            </Button>
-            <DatePicker />
+            <Card number={1} />
+            <Card number={2} />
+            <Card number={3} />
           </main>
         </div>
       </div>
