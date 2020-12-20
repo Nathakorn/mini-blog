@@ -17,6 +17,7 @@ class App extends React.Component {
             <Card number={1} />
             <Card number={2} />
             <Card number={3} />
+            <Card number={4} />
           </main>
         </div>
       </div>
