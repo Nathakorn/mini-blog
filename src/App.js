@@ -5,17 +5,36 @@ import Card from "./components/Card";
 import "./antd.less";
 import InputCardModal from "./components/InputCardModal";
 import InputCardForm from "./components/InputCardForm";
+import { CardList } from "./data/data";
 
 class App extends React.Component {
   state = {
     inputCardModal: false,
+    cardList: CardList,
   };
   toggleInputCardModal = () => {
     this.setState({ inputCardModal: !this.state.inputCardModal });
     console.log("showInputCard");
   };
+  addCard = (card) => {
+    this.setState({ cardList: this.state.cardList.unshift(card) });
+  };
+  submitEditCard = (card) => {
+    let newCardList = this.state.cardList;
+    const objIndex = newCardList.findIndex((obj) => obj.id === card.id);
+    newCardList[objIndex].title = card.title;
+    newCardList[objIndex].category = card.category;
+    newCardList[objIndex].content = card.content;
+    newCardList[objIndex].fileList = card.fileList;
+    this.setState({ cardList: newCardList });
+  };
+  deleteCard = (cardId) => {
+    const objIndex = this.state.cardList.findIndex((obj) => obj.id === cardId);
+    this.setState({ cardList: this.state.cardList.splice(objIndex, 1) });
+  };
+
   render() {
-    const { inputCardModal } = this.state;
+    const { inputCardModal, cardList } = this.state;
     return (
       <div className="container">
         <header className="header">
@@ -34,10 +53,17 @@ class App extends React.Component {
         <div className="content">
           <nav className="sidebar">sidebar</nav>
           <main className="blog-view">
-            <Card number={1} />
-            <Card number={2} />
-            <Card number={3} />
-            <Card number={4} />
+            {cardList.map((card) => {
+              return (
+                <Card
+                  title={card.title}
+                  category={card.category}
+                  content={card.content}
+                  date={card.date}
+                  fileList={card.fileList}
+                />
+              );
+            })}
           </main>
         </div>
         {inputCardModal && (

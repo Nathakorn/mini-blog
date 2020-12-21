@@ -1,17 +1,13 @@
-const Card = ({ number }) => {
+const Card = (props) => {
+  const { title, category, content, date, fileList } = props;
   return (
     <div className="card">
       <div className="card-header">
-        <b>Physic</b>
+        <b>{title}</b>
         <b>Edit icon</b>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit
-        felis. Nunc lacus lorem, scelerisque in eleifend vitae, cursus sed ex.
-        Nunc suscipit turpis ornare, laoreet elit ac, laoreet purus. Quisque sit
-        amet leo lacinia, gravida orci sed,
-      </p>
-      <b>category: studying</b>
+      <b>category: {category}</b>
+      <p>{content}</p>
       <div className="card-feedback">
         <div className="card-like-button">like</div>
         <div className="card-comments">comments</div>
