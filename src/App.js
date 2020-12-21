@@ -8,7 +8,7 @@ import InputCardForm from "./components/InputCardForm";
 
 class App extends React.Component {
   state = {
-    inputCardModal: true,
+    inputCardModal: false,
   };
   toggleInputCardModal = () => {
     this.setState({ inputCardModal: !this.state.inputCardModal });
