@@ -11,13 +11,16 @@ class App extends React.Component {
   state = {
     inputCardModal: false,
     cardList: CardList,
+    cardOperation: "add",
   };
   toggleInputCardModal = () => {
     this.setState({ inputCardModal: !this.state.inputCardModal });
     console.log("showInputCard");
   };
   addCard = (card) => {
-    this.setState({ cardList: this.state.cardList.unshift(card) });
+    const newCardList = this.state.cardList;
+    newCardList.unshift(card);
+    this.setState({ cardList: newCardList });
   };
   submitEditCard = (card) => {
     let newCardList = this.state.cardList;
@@ -34,7 +37,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { inputCardModal, cardList } = this.state;
+    const { inputCardModal, cardList, cardOperation } = this.state;
     return (
       <div className="container">
         <header className="header">
@@ -68,7 +71,10 @@ class App extends React.Component {
         </div>
         {inputCardModal && (
           <InputCardModal toggleInputCardModal={this.toggleInputCardModal}>
-            <InputCardForm />
+            <InputCardForm
+              cardOperation={cardOperation}
+              addCard={this.addCard}
+            />
           </InputCardModal>
         )}
       </div>

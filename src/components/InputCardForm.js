@@ -59,11 +59,12 @@ class InputCardForm extends React.Component {
 
   handleChange = ({ fileList }) => {
     this.setState({ fileList });
-    console.log(fileList);
   };
 
   onFinish = (values) => {
-    console.log(values);
+    const newCard = values;
+    newCard.fileList = this.state.fileList;
+    this.props.addCard(newCard);
   };
   onReset = () => {
     this.formRef.current.resetFields();
@@ -113,28 +114,24 @@ class InputCardForm extends React.Component {
         <Form.Item name="content" label="Content" rules={[{ required: true }]}>
           <Input.TextArea rows={8} allowClear />
         </Form.Item>
-        <Form.Item
-          name="imgUpload"
-          label="Img Upload"
-          rules={[{ required: false }]}
+
+        <Upload
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
         >
-          <Upload
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={this.handlePreview}
-            onChange={this.handleChange}
-          >
-            {fileList.length >= 4 ? null : uploadButton}
-          </Upload>
-          <Modal
-            visible={previewVisible}
-            title={previewTitle}
-            footer={null}
-            onCancel={this.handleCancel}
-          >
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
-          </Modal>
-        </Form.Item>
+          {fileList.length >= 4 ? null : uploadButton}
+        </Upload>
+        <Modal
+          visible={previewVisible}
+          title={previewTitle}
+          footer={null}
+          onCancel={this.handleCancel}
+        >
+          <img alt="example" style={{ width: "100%" }} src={previewImage} />
+        </Modal>
+
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
             Submit
