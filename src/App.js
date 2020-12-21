@@ -3,12 +3,14 @@ import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import Card from "./components/Card";
 import "./antd.less";
+import InputCardModal from "./components/InputCardModal";
+import InputCardForm from "./components/InputCardForm";
 
 class App extends React.Component {
   state = {
-    inputCardModal: false,
+    inputCardModal: true,
   };
-  showInputCardModal = () => {
+  toggleInputCardModal = () => {
     this.setState({ inputCardModal: !this.state.inputCardModal });
     console.log("showInputCard");
   };
@@ -21,7 +23,7 @@ class App extends React.Component {
           <div className="menu">
             <Button
               type="primary"
-              onClick={this.showInputCardModal}
+              onClick={this.toggleInputCardModal}
               icon={<PlusOutlined />}
               size="large"
             >
@@ -39,11 +41,10 @@ class App extends React.Component {
           </main>
         </div>
         {inputCardModal && (
-          <div className="input-card-modal">
-            <div className="input-card-container">test</div>
-          </div>
+          <InputCardModal toggleInputCardModal={this.toggleInputCardModal}>
+            <InputCardForm />
+          </InputCardModal>
         )}
-        {/* <div className="input-card-modal">input modal</div> */}
       </div>
     );
   }
