@@ -36,7 +36,7 @@ const Card = (props) => {
       </div>
       <div className="image-list">
         {fileList.map((file) => {
-          return <Image width={80} src={file.url} />;
+          return <Image key={file.uid} width={80} src={file.url} />;
         })}
       </div>
       <div className="card-author">

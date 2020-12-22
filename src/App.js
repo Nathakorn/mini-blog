@@ -79,6 +79,7 @@ class App extends React.Component {
             {cardList.map((card) => {
               return (
                 <Card
+                  key={card.id}
                   card={card}
                   title={card.title}
                   category={card.category}

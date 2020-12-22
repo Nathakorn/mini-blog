@@ -40,15 +40,7 @@ class InputCardForm extends React.Component {
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
-    fileList: [
-      {
-        uid: "-1",
-        name: "image.png",
-        status: "done",
-        url:
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-    ],
+    fileList: this.props.card.fileList,
   };
   //upload
   handleCancel = () => this.setState({ previewVisible: false });
@@ -92,7 +84,19 @@ class InputCardForm extends React.Component {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit felis. Nunc lacus lorem, scelerisque in eleifend vitae, cursus sed ex. Nunc suscipit turpis ornare, laoreet elit ac, laoreet purus. Quisque sit amet leo lacinia, gravida orci sed, maximus urna. Vestibulum nec malesuada enim. Duis sem sem, euismod et elementum a, faucibus et nisl.",
     });
   };
-
+  onFillCard = () => {
+    const { title, category, content } = this.props.card;
+    this.formRef.current.setFieldsValue({
+      title: title,
+      category: category,
+      content: content,
+    });
+  };
+  componentDidMount() {
+    if (this.props.cardOperation === "edit") {
+      this.onFillCard();
+    }
+  }
   render() {
     const { previewVisible, previewImage, fileList, previewTitle } = this.state;
     const { cardOperation, card, deleteCard } = this.props;
@@ -110,11 +114,7 @@ class InputCardForm extends React.Component {
         onFinish={this.onFinish}
       >
         <Form.Item name="title" label="Title" rules={[{ required: true }]}>
-          {cardOperation === "add" ? (
-            <Input />
-          ) : (
-            <Input defaultValue={card.title} />
-          )}
+          <Input />
         </Form.Item>
         <Form.Item
           name="category"
