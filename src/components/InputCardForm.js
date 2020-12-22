@@ -87,7 +87,7 @@ class InputCardForm extends React.Component {
   }
   render() {
     const { previewVisible, previewImage, fileList, previewTitle } = this.state;
-    const { cardOperation, card, deleteCard } = this.props;
+    const { currentUser, cardOperation, card, deleteCard } = this.props;
     const uploadButton = (
       <div>
         <PlusOutlined />
@@ -96,6 +96,7 @@ class InputCardForm extends React.Component {
     );
     return (
       <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+        <p>Author : {currentUser}</p>
         <Form.Item name="title" label="Title" rules={[{ required: true }]}>
           <Input />
         </Form.Item>

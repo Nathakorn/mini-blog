@@ -13,6 +13,15 @@ class App extends React.Component {
     cardList: CardList,
     cardOperation: "add",
     card: null,
+    currentUser: "Bille Joe",
+  };
+  changeUser = () => {
+    console.log("yayy");
+    if (this.state.currentUser === "Bille Joe") {
+      this.setState({ currentUser: "Tom Cruise" });
+    } else if (this.state.currentUser === "Tom Cruise") {
+      this.setState({ currentUser: "Bille Joe" });
+    }
   };
   toggleInputCardModal = (operation, card) => {
     console.log(operation);
@@ -59,10 +68,20 @@ class App extends React.Component {
   };
 
   render() {
-    const { inputCardModal, cardList, cardOperation, card } = this.state;
+    const {
+      currentUser,
+      inputCardModal,
+      cardList,
+      cardOperation,
+      card,
+    } = this.state;
     return (
       <div className="container">
-        <Header toggleInputCardModal={this.toggleInputCardModal} />
+        <Header
+          toggleInputCardModal={this.toggleInputCardModal}
+          currentUser={currentUser}
+          changeUser={this.changeUser}
+        />
         <div className="content">
           <nav className="sidebar"></nav>
           <BlogView
@@ -73,6 +92,7 @@ class App extends React.Component {
         {inputCardModal && (
           <InputCardModal toggleInputCardModal={this.toggleInputCardModal}>
             <InputCardForm
+              currentUser={currentUser}
               toggleInputCardModal={this.toggleInputCardModal}
               cardOperation={cardOperation}
               addCard={this.addCard}
