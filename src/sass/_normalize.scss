@@ -12,6 +12,7 @@
 html {
   box-sizing: border-box;
   font-size: 100%; //  16px = 100% default, 1rem = 10px, (100/16) * 10 = 62.5%
+  background-color: $black;
 }
 
 body {

@@ -64,7 +64,7 @@ class App extends React.Component {
       <div className="container">
         <Header toggleInputCardModal={this.toggleInputCardModal} />
         <div className="content">
-          <nav className="sidebar">sidebar</nav>
+          <nav className="sidebar"></nav>
           <BlogView
             cardList={cardList}
             toggleInputCardModal={this.toggleInputCardModal}

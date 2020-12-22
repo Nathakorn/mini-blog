@@ -37,7 +37,7 @@ const Card = (props) => {
           />
         </Tooltip>
       </div>
-      <b className="category-label">category: {category}</b>
+      <b className="category-label">Category: {category}</b>
       <p className="blog-content">{content}</p>
       <div className="card-feedback">
         <div className="card-like-button">
