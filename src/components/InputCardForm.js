@@ -40,7 +40,7 @@ class InputCardForm extends React.Component {
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
-    fileList: this.props.card.fileList,
+    fileList: [],
   };
   //upload
   handleCancel = () => this.setState({ previewVisible: false });
@@ -85,12 +85,13 @@ class InputCardForm extends React.Component {
     });
   };
   onFillCard = () => {
-    const { title, category, content } = this.props.card;
+    const { title, category, content, fileList } = this.props.card;
     this.formRef.current.setFieldsValue({
       title: title,
       category: category,
       content: content,
     });
+    this.setState({ fileList: fileList });
   };
   componentDidMount() {
     if (this.props.cardOperation === "edit") {

@@ -52,8 +52,11 @@ class App extends React.Component {
     this.setState({ cardList: newCardList });
   };
   deleteCard = (cardId) => {
-    const objIndex = this.state.cardList.findIndex((obj) => obj.id === cardId);
-    this.setState({ cardList: this.state.cardList.splice(objIndex, 1) });
+    console.log("delete card id ", cardId);
+    let newCardList = this.state.cardList;
+    const objIndex = newCardList.findIndex((obj) => obj.id === cardId);
+    newCardList.splice(objIndex, 1);
+    this.setState({ cardList: newCardList });
   };
 
   render() {
