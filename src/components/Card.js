@@ -14,6 +14,7 @@ const Card = (props) => {
   const {
     card,
     title,
+    author,
     category,
     content,
     date,
@@ -31,7 +32,7 @@ const Card = (props) => {
             shape="circle"
             icon={
               <EditOutlined
-                onClick={() => toggleInputCardModal("edit", card)}
+                onClick={() => toggleInputCardModal("edit", card, author)}
               />
             }
           />
@@ -59,7 +60,7 @@ const Card = (props) => {
         </div>
         <div className="card-author-details">
           <div className="card-author-name">
-            <b>name sukum</b>
+            <b>{author}</b>
           </div>
           <div className="card-publish-date">2 hour ago</div>
         </div>

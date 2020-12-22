@@ -6,6 +6,7 @@ import InputCardForm from "./components/InputCardForm";
 import { CardList } from "./data/data";
 import Header from "./components/Header";
 import BlogView from "./components/BlogView";
+import { Alert } from "antd";
 
 class App extends React.Component {
   state = {
@@ -13,29 +14,42 @@ class App extends React.Component {
     cardList: CardList,
     cardOperation: "add",
     card: null,
-    currentUser: "Bille Joe",
+    currentUser: "Billie Joe",
+    alert: null,
   };
   changeUser = () => {
-    console.log("yayy");
-    if (this.state.currentUser === "Bille Joe") {
+    if (this.state.currentUser === "Billie Joe") {
       this.setState({ currentUser: "Tom Cruise" });
     } else if (this.state.currentUser === "Tom Cruise") {
       this.setState({ currentUser: "Bille Joe" });
     }
   };
-  toggleInputCardModal = (operation, card) => {
+  updateAlert = (text, type) => {
+    this.setState({ alert: { text: text, type: type } });
+  };
+  toggleInputCardModal = (operation, card, author) => {
     console.log(operation);
+    if (!this.state.inputCardModal) {
+      this.setState({ alert: null });
+    }
     if (operation === "add") {
       this.setState({
         inputCardModal: !this.state.inputCardModal,
         cardOperation: operation,
       });
     } else if (operation === "edit") {
-      this.setState({
-        inputCardModal: !this.state.inputCardModal,
-        cardOperation: operation,
-        card: card,
-      });
+      if (this.state.currentUser === author) {
+        this.setState({
+          inputCardModal: !this.state.inputCardModal,
+          cardOperation: operation,
+          card: card,
+        });
+      } else {
+        this.updateAlert(
+          "Only the author of the card can perform this function!",
+          "error"
+        );
+      }
     } else {
       this.setState({
         inputCardModal: !this.state.inputCardModal,
@@ -64,6 +78,7 @@ class App extends React.Component {
     const objIndex = newCardList.findIndex((obj) => obj.id === cardId);
     newCardList.splice(objIndex, 1);
     this.setState({ cardList: newCardList });
+    this.updateAlert("Delete completely!", "success");
     this.toggleInputCardModal("end");
   };
 
@@ -74,9 +89,15 @@ class App extends React.Component {
       cardList,
       cardOperation,
       card,
+      alert,
     } = this.state;
+    console.log("testttttt  ", alert);
     return (
       <div className="container">
+        {alert && (
+          <Alert message={alert.text} type={alert.type} showIcon closable />
+        )}
+
         <Header
           toggleInputCardModal={this.toggleInputCardModal}
           currentUser={currentUser}
@@ -99,6 +120,7 @@ class App extends React.Component {
               editCard={this.editCard}
               deleteCard={this.deleteCard}
               card={card}
+              updateAlert={this.updateAlert}
             />
           </InputCardModal>
         )}
