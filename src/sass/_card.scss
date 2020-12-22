@@ -1,16 +1,56 @@
 .card {
-  width: 29%;
+  width: 45%;
   margin: 1%;
+  padding: 25px;
   background-color: $white;
   border-radius: $card-border-radius;
 }
 .card-header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    margin: 0 !important;
+    display: table-cell;
+    font-size: 1.2rem;
+  }
+  button {
+    // padding-top: 5px;
+  }
+}
+.category-label {
+  font-size: 0.8rem;
+}
+.blog-content {
+  font-size: 1.2rem;
+  margin: 20px 0 20px 0;
+}
+.card-like-button {
+  padding-right: 10px;
+  border-right: 1px solid $black;
+}
+.card-comments {
+  padding-left: 10px;
+  border-left: 1px solid $black;
+}
+.heart-icon {
+  margin-right: 5px;
 }
 .card-feedback {
   display: flex;
+  margin-left: 15px;
+}
+.image-list {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
 }
 .card-author {
+  margin-left: 15px;
   display: flex;
+  align-items: center;
+}
+.card-user-avatar {
+  margin-right: 20px;
 }

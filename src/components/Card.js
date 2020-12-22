@@ -1,5 +1,6 @@
 import { Button, Tooltip, Image } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, HeartTwoTone, UserOutlined } from "@ant-design/icons";
+import { Avatar } from "antd";
 
 function ImageSrc(file) {
   console.log(file);
@@ -23,7 +24,7 @@ const Card = (props) => {
   return (
     <div className="card">
       <div className="card-header">
-        <b>{title}</b>
+        <p>{title}</p>
         <Tooltip title="edit">
           <Button
             type="primary"
@@ -36,22 +37,31 @@ const Card = (props) => {
           />
         </Tooltip>
       </div>
-      <b>category: {category}</b>
-      <p>{content}</p>
+      <b className="category-label">category: {category}</b>
+      <p className="blog-content">{content}</p>
       <div className="card-feedback">
-        <div className="card-like-button">like</div>
-        <div className="card-comments">comments</div>
+        <div className="card-like-button">
+          <HeartTwoTone className="heart-icon" twoToneColor="#eb2f96" />
+          <b>21</b>
+        </div>
+        <div className="card-comments">
+          <b style={{ marginRight: "5px" }}>5</b>comments
+        </div>
       </div>
       <div className="image-list">
         {fileList.map((file) => {
-          return <Image key={file.uid} width={80} src={ImageSrc(file)} />;
+          return <Image key={file.uid} width={100} src={ImageSrc(file)} />;
         })}
       </div>
       <div className="card-author">
-        <div className="card-avatar">avatar</div>
+        <div className="card-user-avatar">
+          <Avatar size={35} icon={<UserOutlined />} />
+        </div>
         <div className="card-author-details">
-          <div className="card-author-name">name sukum</div>
-          <div className="card-publish-date">12/12/12</div>
+          <div className="card-author-name">
+            <b>name sukum</b>
+          </div>
+          <div className="card-publish-date">2 hour ago</div>
         </div>
       </div>
     </div>

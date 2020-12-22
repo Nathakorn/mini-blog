@@ -1,11 +1,11 @@
 import React from "react";
 
-import Card from "./components/Card";
 import "./antd.less";
 import InputCardModal from "./components/InputCardModal";
 import InputCardForm from "./components/InputCardForm";
 import { CardList } from "./data/data";
 import Header from "./components/Header";
+import BlogView from "./components/BlogView";
 
 class App extends React.Component {
   state = {
@@ -65,22 +65,10 @@ class App extends React.Component {
         <Header toggleInputCardModal={this.toggleInputCardModal} />
         <div className="content">
           <nav className="sidebar">sidebar</nav>
-          <main className="blog-view">
-            {cardList.map((card) => {
-              return (
-                <Card
-                  key={card.id}
-                  card={card}
-                  title={card.title}
-                  category={card.category}
-                  content={card.content}
-                  date={card.date}
-                  fileList={card.fileList}
-                  toggleInputCardModal={this.toggleInputCardModal}
-                />
-              );
-            })}
-          </main>
+          <BlogView
+            cardList={cardList}
+            toggleInputCardModal={this.toggleInputCardModal}
+          />
         </div>
         {inputCardModal && (
           <InputCardModal toggleInputCardModal={this.toggleInputCardModal}>
