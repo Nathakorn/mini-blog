@@ -32,8 +32,6 @@ class App extends React.Component {
         inputCardModal: !this.state.inputCardModal,
       });
     }
-
-    console.log("showInputCard");
   };
   addCard = (card) => {
     const newCardList = this.state.cardList;
@@ -57,6 +55,7 @@ class App extends React.Component {
     const objIndex = newCardList.findIndex((obj) => obj.id === cardId);
     newCardList.splice(objIndex, 1);
     this.setState({ cardList: newCardList });
+    this.toggleInputCardModal("end");
   };
 
   render() {
@@ -98,6 +97,7 @@ class App extends React.Component {
         {inputCardModal && (
           <InputCardModal toggleInputCardModal={this.toggleInputCardModal}>
             <InputCardForm
+              toggleInputCardModal={this.toggleInputCardModal}
               cardOperation={cardOperation}
               addCard={this.addCard}
               editCard={this.editCard}

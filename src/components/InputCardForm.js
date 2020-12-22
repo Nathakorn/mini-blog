@@ -72,6 +72,7 @@ class InputCardForm extends React.Component {
       newCard.id = this.props.card.id;
       this.props.editCard(newCard);
     }
+    this.props.toggleInputCardModal("end");
   };
   onReset = () => {
     this.formRef.current.resetFields();
@@ -133,11 +134,10 @@ class InputCardForm extends React.Component {
           </Select>
         </Form.Item>
         <Form.Item name="content" label="Content" rules={[{ required: true }]}>
-          <Input.TextArea rows={8} allowClear />
+          <Input.TextArea rows={8} allowClear maxLength={300} />
         </Form.Item>
 
         <Upload
-          // action={"https://res.cloudinary.com/dt4dve4x5/image/upload"}
           listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}

@@ -1,6 +1,14 @@
 import { Button, Tooltip, Image } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
+function ImageSrc(file) {
+  console.log(file);
+  if (!file.url) {
+    return file.thumbUrl;
+  } else {
+    return file.url;
+  }
+}
 const Card = (props) => {
   const {
     card,
@@ -36,7 +44,7 @@ const Card = (props) => {
       </div>
       <div className="image-list">
         {fileList.map((file) => {
-          return <Image key={file.uid} width={80} src={file.url} />;
+          return <Image key={file.uid} width={80} src={ImageSrc(file)} />;
         })}
       </div>
       <div className="card-author">
