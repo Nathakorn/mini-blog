@@ -19,20 +19,6 @@ function uuidv4() {
 }
 
 const { Option } = Select;
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 
 class InputCardForm extends React.Component {
   formRef = React.createRef();
@@ -109,12 +95,7 @@ class InputCardForm extends React.Component {
       </div>
     );
     return (
-      <Form
-        {...layout}
-        ref={this.formRef}
-        name="control-ref"
-        onFinish={this.onFinish}
-      >
+      <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
         <Form.Item name="title" label="Title" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
@@ -124,6 +105,7 @@ class InputCardForm extends React.Component {
           rules={[{ required: true }]}
         >
           <Select placeholder="Select a category" allowClear>
+            <Option value="programming">Programming</Option>
             <Option value="biology">Biology</Option>
             <Option value="finance">Finance</Option>
             <Option value="chemistry">Chemistry</Option>
@@ -133,18 +115,26 @@ class InputCardForm extends React.Component {
             <Option value="space">Space</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="content" label="Content" rules={[{ required: true }]}>
-          <Input.TextArea rows={8} allowClear maxLength={300} />
+        <Form.Item name="content" rules={[{ required: true }]}>
+          <Input.TextArea
+            placeholder="What's happening?"
+            className="card-input-textArea"
+            rows={8}
+            allowClear
+            maxLength={300}
+          />
         </Form.Item>
+        <div className="upload-component">
+          <Upload
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={this.handlePreview}
+            onChange={this.handleChange}
+          >
+            {fileList.length >= 4 ? null : uploadButton}
+          </Upload>
+        </div>
 
-        <Upload
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={this.handlePreview}
-          onChange={this.handleChange}
-        >
-          {fileList.length >= 4 ? null : uploadButton}
-        </Upload>
         <Modal
           visible={previewVisible}
           title={previewTitle}
@@ -154,8 +144,8 @@ class InputCardForm extends React.Component {
           <img alt="example" style={{ width: "100%" }} src={previewImage} />
         </Modal>
 
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+        <Form.Item className="operation">
+          <Button className="submit-button" type="primary" htmlType="submit">
             Submit
           </Button>
           <Button htmlType="button" onClick={this.onReset}>
@@ -166,14 +156,16 @@ class InputCardForm extends React.Component {
           </Button>
         </Form.Item>
         {cardOperation === "edit" && (
-          <Button
-            type="primary"
-            onClick={() => deleteCard(card.id)}
-            icon={<DeleteOutlined />}
-            danger
-          >
-            Delete
-          </Button>
+          <div className="danger-section">
+            <Button
+              type="primary"
+              onClick={() => deleteCard(card.id)}
+              icon={<DeleteOutlined />}
+              danger
+            >
+              Delete
+            </Button>
+          </div>
         )}
       </Form>
     );
