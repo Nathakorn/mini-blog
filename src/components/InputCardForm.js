@@ -54,11 +54,11 @@ class InputCardForm extends React.Component {
       newCard.id = uuidv4();
       newCard.author = this.props.currentUser;
       this.props.addCard(newCard);
-      this.props.updateAlert("Add completely!", "success");
+      this.props.updateAlert("Completely add!", "success");
     } else if (this.props.cardOperation === "edit") {
       newCard.id = this.props.card.id;
       this.props.editCard(newCard);
-      this.props.updateAlert("Edit completely!", "success");
+      this.props.updateAlert("Completely edit!", "success");
     }
     this.props.toggleInputCardModal("end");
   };

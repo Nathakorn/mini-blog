@@ -73,7 +73,7 @@ class App extends React.Component {
     const objIndex = newCardList.findIndex((obj) => obj.id === cardId);
     newCardList.splice(objIndex, 1);
     this.setState({ cardList: newCardList });
-    this.updateAlert("Delete completely!", "success");
+    this.updateAlert("Completely delete!", "success");
     this.toggleInputCardModal("end");
   };
 
