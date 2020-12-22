@@ -9,7 +9,7 @@ const InputCardModal = (props) => {
         <Tooltip title="Close">
           <Button
             type="primary"
-            onClick={props.toggleInputCardModal}
+            onClick={() => props.toggleInputCardModal("", undefined)}
             shape="circle"
             icon={<CloseOutlined />}
             size="large"

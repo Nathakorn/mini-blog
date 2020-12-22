@@ -12,19 +12,39 @@ class App extends React.Component {
     inputCardModal: false,
     cardList: CardList,
     cardOperation: "add",
+    card: null,
   };
-  toggleInputCardModal = () => {
-    this.setState({ inputCardModal: !this.state.inputCardModal });
+  toggleInputCardModal = (operation, card) => {
+    console.log(operation);
+    if (operation === "add") {
+      this.setState({
+        inputCardModal: !this.state.inputCardModal,
+        cardOperation: operation,
+      });
+    } else if (operation === "edit") {
+      this.setState({
+        inputCardModal: !this.state.inputCardModal,
+        cardOperation: operation,
+        card: card,
+      });
+    } else {
+      this.setState({
+        inputCardModal: !this.state.inputCardModal,
+      });
+    }
+
     console.log("showInputCard");
   };
   addCard = (card) => {
     const newCardList = this.state.cardList;
     newCardList.unshift(card);
     this.setState({ cardList: newCardList });
+    console.log(newCardList);
   };
-  submitEditCard = (card) => {
+  editCard = (card) => {
     let newCardList = this.state.cardList;
     const objIndex = newCardList.findIndex((obj) => obj.id === card.id);
+    console.log(card.id);
     newCardList[objIndex].title = card.title;
     newCardList[objIndex].category = card.category;
     newCardList[objIndex].content = card.content;
@@ -37,7 +57,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { inputCardModal, cardList, cardOperation } = this.state;
+    const { inputCardModal, cardList, cardOperation, card } = this.state;
     return (
       <div className="container">
         <header className="header">
@@ -45,7 +65,7 @@ class App extends React.Component {
           <div className="menu">
             <Button
               type="primary"
-              onClick={this.toggleInputCardModal}
+              onClick={() => this.toggleInputCardModal("add")}
               icon={<PlusOutlined />}
               size="large"
             >
@@ -59,11 +79,13 @@ class App extends React.Component {
             {cardList.map((card) => {
               return (
                 <Card
+                  card={card}
                   title={card.title}
                   category={card.category}
                   content={card.content}
                   date={card.date}
                   fileList={card.fileList}
+                  toggleInputCardModal={this.toggleInputCardModal}
                 />
               );
             })}
@@ -74,6 +96,9 @@ class App extends React.Component {
             <InputCardForm
               cardOperation={cardOperation}
               addCard={this.addCard}
+              editCard={this.editCard}
+              deleteCard={this.deleteCard}
+              card={card}
             />
           </InputCardModal>
         )}

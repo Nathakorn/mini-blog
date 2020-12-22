@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Select, Upload, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -10,6 +10,14 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -59,12 +67,19 @@ class InputCardForm extends React.Component {
 
   handleChange = ({ fileList }) => {
     this.setState({ fileList });
+    console.log("test file", fileList);
   };
 
   onFinish = (values) => {
     const newCard = values;
     newCard.fileList = this.state.fileList;
-    this.props.addCard(newCard);
+    if (this.props.cardOperation === "add") {
+      newCard.id = uuidv4();
+      this.props.addCard(newCard);
+    } else if (this.props.cardOperation === "edit") {
+      newCard.id = this.props.card.id;
+      this.props.editCard(newCard);
+    }
   };
   onReset = () => {
     this.formRef.current.resetFields();
@@ -80,6 +95,7 @@ class InputCardForm extends React.Component {
 
   render() {
     const { previewVisible, previewImage, fileList, previewTitle } = this.state;
+    const { cardOperation, card, deleteCard } = this.props;
     const uploadButton = (
       <div>
         <PlusOutlined />
@@ -94,7 +110,11 @@ class InputCardForm extends React.Component {
         onFinish={this.onFinish}
       >
         <Form.Item name="title" label="Title" rules={[{ required: true }]}>
-          <Input />
+          {cardOperation === "add" ? (
+            <Input />
+          ) : (
+            <Input defaultValue={card.title} />
+          )}
         </Form.Item>
         <Form.Item
           name="category"
@@ -116,6 +136,7 @@ class InputCardForm extends React.Component {
         </Form.Item>
 
         <Upload
+          // action={"https://res.cloudinary.com/dt4dve4x5/image/upload"}
           listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}
@@ -143,6 +164,16 @@ class InputCardForm extends React.Component {
             Fill form
           </Button>
         </Form.Item>
+        {cardOperation === "edit" && (
+          <Button
+            type="primary"
+            onClick={() => deleteCard(card.id)}
+            icon={<DeleteOutlined />}
+            danger
+          >
+            Delete
+          </Button>
+        )}
       </Form>
     );
   }
