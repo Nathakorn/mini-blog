@@ -1,0 +1,23 @@
+.operation {
+  .ant-form-item-control-input-content {
+    display: flex;
+    justify-content: center;
+  }
+  .submit-button {
+    margin-right: 15px;
+  }
+}
+.upload-component {
+  margin: 20px 0 20px 0;
+  .ant-upload-list.ant-upload-list-picture-card {
+    display: flex;
+    justify-content: center;
+  }
+}
+.card-input-textArea {
+  resize: none;
+}
+.danger-section {
+  display: flex;
+  justify-content: center;
+}

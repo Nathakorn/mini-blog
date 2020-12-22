@@ -1,0 +1,56 @@
+.header {
+  background-color: $black;
+  height: 7rem;
+  display: flex;
+}
+.logo-section {
+  flex: 0 0 20%;
+  background-color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    font-family: inherit;
+    font-size: 2.5rem;
+    color: white;
+    margin: 0;
+  }
+}
+.menu-section {
+  flex: 1;
+  background-color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.new-card-button {
+  margin-left: 30px;
+  width: 200px;
+  height: 70px !important;
+  font-size: 1.8rem !important;
+  color: $primary !important;
+}
+.ant-avatar {
+  background-color: $primary !important;
+}
+// .user-avatar {
+//   margin-right: 40px !important;
+//   background-color: $primary !important;
+// }
+.user-section {
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 10px;
+  }
+}
+.user-details {
+  padding-top: 10px;
+  margin-right: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  p {
+    margin-bottom: unset !important;
+  }
+}
