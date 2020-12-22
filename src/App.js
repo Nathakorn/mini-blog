@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+
 import Card from "./components/Card";
 import "./antd.less";
 import InputCardModal from "./components/InputCardModal";
 import InputCardForm from "./components/InputCardForm";
 import { CardList } from "./data/data";
+import Header from "./components/Header";
 
 class App extends React.Component {
   state = {
@@ -62,19 +62,7 @@ class App extends React.Component {
     const { inputCardModal, cardList, cardOperation, card } = this.state;
     return (
       <div className="container">
-        <header className="header">
-          <div className="logo-section">You know</div>
-          <div className="menu">
-            <Button
-              type="primary"
-              onClick={() => this.toggleInputCardModal("add")}
-              icon={<PlusOutlined />}
-              size="large"
-            >
-              New Card
-            </Button>
-          </div>
-        </header>
+        <Header toggleInputCardModal={this.toggleInputCardModal} />
         <div className="content">
           <nav className="sidebar">sidebar</nav>
           <main className="blog-view">
