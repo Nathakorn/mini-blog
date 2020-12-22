@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./antd.less";
 import InputCardModal from "./components/InputCardModal";
 import InputCardForm from "./components/InputCardForm";
@@ -21,14 +20,13 @@ class App extends React.Component {
     if (this.state.currentUser === "Billie Joe") {
       this.setState({ currentUser: "Tom Cruise" });
     } else if (this.state.currentUser === "Tom Cruise") {
-      this.setState({ currentUser: "Bille Joe" });
+      this.setState({ currentUser: "Billie Joe" });
     }
   };
   updateAlert = (text, type) => {
     this.setState({ alert: { text: text, type: type } });
   };
   toggleInputCardModal = (operation, card, author) => {
-    console.log(operation);
     if (!this.state.inputCardModal) {
       this.setState({ alert: null });
     }
@@ -60,12 +58,10 @@ class App extends React.Component {
     const newCardList = this.state.cardList;
     newCardList.unshift(card);
     this.setState({ cardList: newCardList });
-    console.log(newCardList);
   };
   editCard = (card) => {
     let newCardList = this.state.cardList;
     const objIndex = newCardList.findIndex((obj) => obj.id === card.id);
-    console.log(card.id);
     newCardList[objIndex].title = card.title;
     newCardList[objIndex].category = card.category;
     newCardList[objIndex].content = card.content;
@@ -73,7 +69,6 @@ class App extends React.Component {
     this.setState({ cardList: newCardList });
   };
   deleteCard = (cardId) => {
-    console.log("delete card id ", cardId);
     let newCardList = this.state.cardList;
     const objIndex = newCardList.findIndex((obj) => obj.id === cardId);
     newCardList.splice(objIndex, 1);
@@ -91,7 +86,7 @@ class App extends React.Component {
       card,
       alert,
     } = this.state;
-    console.log("testttttt  ", alert);
+
     return (
       <div className="container">
         {alert && (

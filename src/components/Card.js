@@ -3,7 +3,6 @@ import { EditOutlined, HeartTwoTone, UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 
 function ImageSrc(file) {
-  console.log(file);
   if (!file.url) {
     return file.thumbUrl;
   } else {
@@ -28,13 +27,9 @@ const Card = (props) => {
         <p>{title}</p>
         <Tooltip title="edit">
           <Button
-            type="primary"
-            shape="circle"
-            icon={
-              <EditOutlined
-                onClick={() => toggleInputCardModal("edit", card, author)}
-              />
-            }
+            type="link"
+            onClick={() => toggleInputCardModal("edit", card, author)}
+            icon={<EditOutlined />}
           />
         </Tooltip>
       </div>
@@ -43,10 +38,10 @@ const Card = (props) => {
       <div className="card-feedback">
         <div className="card-like-button">
           <HeartTwoTone className="heart-icon" twoToneColor="#eb2f96" />
-          <b>21</b>
+          <b>0</b>
         </div>
         <div className="card-comments">
-          <b style={{ marginRight: "5px" }}>5</b>comments
+          <b style={{ marginRight: "5px" }}>0</b>comments
         </div>
       </div>
       <div className="image-list">

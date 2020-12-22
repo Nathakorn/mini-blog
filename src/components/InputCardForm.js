@@ -45,7 +45,6 @@ class InputCardForm extends React.Component {
 
   handleChange = ({ fileList }) => {
     this.setState({ fileList });
-    console.log("test file", fileList);
   };
 
   onFinish = (values) => {
@@ -53,6 +52,7 @@ class InputCardForm extends React.Component {
     newCard.fileList = this.state.fileList;
     if (this.props.cardOperation === "add") {
       newCard.id = uuidv4();
+      newCard.author = this.props.currentUser;
       this.props.addCard(newCard);
       this.props.updateAlert("Add completely!", "success");
     } else if (this.props.cardOperation === "edit") {
@@ -108,14 +108,14 @@ class InputCardForm extends React.Component {
           rules={[{ required: true }]}
         >
           <Select placeholder="Select a category" allowClear>
-            <Option value="programming">Programming</Option>
-            <Option value="biology">Biology</Option>
-            <Option value="finance">Finance</Option>
-            <Option value="chemistry">Chemistry</Option>
-            <Option value="engineering">Engineering</Option>
-            <Option value="health">Health</Option>
-            <Option value="society">Society</Option>
-            <Option value="space">Space</Option>
+            <Option value="Programming">Programming</Option>
+            <Option value="Biology">Biology</Option>
+            <Option value="Finance">Finance</Option>
+            <Option value="Chemistry">Chemistry</Option>
+            <Option value="Engineering">Engineering</Option>
+            <Option value="Health">Health</Option>
+            <Option value="Society">Society</Option>
+            <Option value="Space">Space</Option>
           </Select>
         </Form.Item>
         <Form.Item name="content" rules={[{ required: true }]}>
